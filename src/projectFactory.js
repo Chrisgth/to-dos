@@ -3,11 +3,9 @@ export default function projectFactory(name, description) {
     let todos = []
     let projectName = name
     let projectDescription = description
-    let projectId = 0
     return {
         todos,
         projectName,
         projectDescription,
-        projectId,
     }
 }

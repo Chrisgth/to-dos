@@ -19,8 +19,8 @@ export default function pageLoad() {
 
     const newProject = document.createElement('button')
 
-    newProject.textContent = 'newpr'
-    newProject.id = 'newpr'
+    newProject.textContent = 'New Project'
+    newProject.id = 'newProject'
     sidebar.appendChild(newProject)
     sidebar.id = 'sidebar'
 

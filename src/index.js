@@ -7,12 +7,20 @@ let projects = [];
 
 pageLoad();
 
-document.getElementById('newpr').addEventListener('click', () => {
-    document.getElementById('projectPopup').classList.add('active')
+const newProject = document.getElementById('newProject')
+const projectPopup = document.getElementById('projectPopup')
+const projectFormSubmit = document.getElementById('projectFormSubmit')
+
+// makes the new project creation popup visible
+newProject.addEventListener('click', () => {
+projectPopup.classList.add('active')
 })
-document.getElementById('projectFormSubmit').addEventListener('click', () => {
-    let formData = document.getElementById('formPopup')
-    let newProject = projectFactory(formData[0].value, formData[1].value)
-    console.log(newProject)
-    document.getElementById('projectPopup').classList.remove('active')
+
+// utilizes the projectFactory function to create a new project with distinct parameters input inside the popup form
+projectFormSubmit.addEventListener('click', () => {
+let formData = document.getElementById('formPopup')
+let newProject = projectFactory(formData[0].value, formData[1].value)
+projects.push(newProject)
+projectPopup.classList.remove('active')
 })
+
