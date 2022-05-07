@@ -7,9 +7,11 @@ export default function displayProjects(projectArray) {
 
     for ( let i=0; i<projectsArray.length; i++ ) {
         let projectNameLi = document.createElement('li')
+        projectNameLi.value = i
         console.log(projectArray)
         projectNameLi.textContent = projectsArray[i].projectName
         allToDos.innerHTML = ''
+        allProjectsUl.appendChild(projectNameLi)
         projectNameLi.addEventListener('click', () => {
             allToDos.innerHTML = ''
             for ( let a=0; a<projectsArray[i].todos.length; a++ ) {
@@ -18,7 +20,7 @@ export default function displayProjects(projectArray) {
                 allToDos.appendChild(toDoLi)
             }
         })
-        allProjectsUl.appendChild(projectNameLi)
+
     }
     for ( let i=0; i<projectsArray[0].todos.length; i++ ) {
         let toDoLi = document.createElement('li')

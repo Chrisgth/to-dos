@@ -14,9 +14,40 @@ export default function pageLoad() {
 
     const newToDo = document.createElement('button')
     const allToDos = document.createElement('ul')
+    const toDoForm = document.createElement('form')
+
+    for( let i=0; i<3; i++ ) {
+        let toDoFormInputDiv = document.createElement('div')
+        let toDoFormLabel = document.createElement('label')
+        let toDoFormInput = document.createElement('input')
+
+        if (i===0) {
+            toDoFormInput.id = 'toDoName'
+            toDoFormInput.name = 'toDoName'
+            toDoFormLabel.htmlFor = 'toDoName'
+            toDoFormLabel.textContent = 'Title'
+        } else if (i===1) {
+            toDoFormInput.id = 'toDoDescription'
+            toDoFormInput.name = 'toDoDescription'
+            toDoFormLabel.htmlFor = 'toDoDescription' 
+            toDoFormLabel.textContent = 'Description'          
+        } else if (i===2) {
+            toDoFormInput.id = 'toDoDue'
+            toDoFormInput.name = 'toDoDue'
+            toDoFormInput.type = 'date'
+            toDoFormLabel.htmlFor = 'toDoDue'
+            toDoFormLabel.textContent = 'Due Date'
+        }
+        toDoFormInputDiv.appendChild(toDoFormLabel)
+        toDoFormInputDiv.appendChild(toDoFormInput)
+        toDoForm.appendChild(toDoFormInputDiv)
+    }
+
     newToDo.textContent = 'createnewtodo'
     newToDo.id = 'newToDo'
     allToDos.id = 'allToDos'
+    toDoForm.id = 'toDoForm'
+    main.appendChild(toDoForm)
     main.appendChild(newToDo)
     main.appendChild(allToDos)
 
