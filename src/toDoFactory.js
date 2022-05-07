@@ -1,3 +1,4 @@
+// factory function that creates a todo with 4 defined properties and 2 predefined ones
 export default function toDoFactory(title, description, dueDate, priority) {
     let toDoTitle = title;
     let toDoDesc = description;
