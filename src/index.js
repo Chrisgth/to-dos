@@ -4,7 +4,10 @@ import projectFactory from './projectFactory.js'
 import pageLoad from './pageLoad.js'
 import displayProjects from './displayProjects';
 
-let projects = [];
+let projects = [projectFactory('Default Project', 'The Default Project')];
+projects[0].todos[0] = toDoFactory('Default ToDo', 'The Default ToDo', 'Tomorrow', 0)
+console.log(projects[0].todos[0].toDoTitle)
+let currentProject = [];
 
 pageLoad();
 displayProjects(projects);
