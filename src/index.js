@@ -22,6 +22,8 @@ projectPopup.classList.add('active')
 projectFormSubmit.addEventListener('click', () => {
 let formData = document.getElementById('formPopup')
 let newProject = projectFactory(formData[0].value, formData[1].value)
+formData[0].value = ''
+formData[1].value = ''
 projects.push(newProject)
 projectPopup.classList.remove('active')
 displayProjects(projects);

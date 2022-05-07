@@ -10,7 +10,8 @@ header {
     grid-column: 1 / end;
     display: flex;
 }
-button {
+button,
+li {
     cursor: pointer;
 }
 #projectPopup {

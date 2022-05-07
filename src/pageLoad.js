@@ -13,9 +13,12 @@ export default function pageLoad() {
     header.appendChild(pageLogo)
 
     const newToDo = document.createElement('button')
+    const allToDos = document.createElement('ul')
     newToDo.textContent = 'createnewtodo'
     newToDo.id = 'newToDo'
+    allToDos.id = 'allToDos'
     main.appendChild(newToDo)
+    main.appendChild(allToDos)
 
     const newProject = document.createElement('button')
     const allProjects = document.createElement('ul')
