@@ -2,10 +2,12 @@ import './style.css'
 import toDoFactory from './toDoFactory.js'
 import projectFactory from './projectFactory.js'
 import pageLoad from './pageLoad.js'
+import displayProjects from './displayProjects';
 
 let projects = [];
 
 pageLoad();
+displayProjects(projects);
 
 const newProject = document.getElementById('newProject')
 const projectPopup = document.getElementById('projectPopup')
@@ -22,5 +24,6 @@ let formData = document.getElementById('formPopup')
 let newProject = projectFactory(formData[0].value, formData[1].value)
 projects.push(newProject)
 projectPopup.classList.remove('active')
+displayProjects(projects);
 })
 

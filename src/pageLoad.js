@@ -18,10 +18,13 @@ export default function pageLoad() {
     main.appendChild(newToDo)
 
     const newProject = document.createElement('button')
+    const allProjects = document.createElement('ul')
 
     newProject.textContent = 'New Project'
     newProject.id = 'newProject'
+    allProjects.id = 'allProjects'
     sidebar.appendChild(newProject)
+    sidebar.appendChild(allProjects)
     sidebar.id = 'sidebar'
 
     body.appendChild(header)
