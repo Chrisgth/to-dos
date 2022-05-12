@@ -1,5 +1,6 @@
-import toDoFactory from "./toDoFactory"
-
+import { projectCreator } from "./projectCreator"
+import { toDoCreator } from "./toDoCreator"
+// loads the page with full functionality
 export default function pageLoad() {
     // html boilerplate
     const body = document.querySelector('body')
@@ -100,5 +101,4 @@ export default function pageLoad() {
     formPopup.appendChild(formButton)
 
     body.appendChild(projectPopup)
-
 }
