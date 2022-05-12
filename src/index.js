@@ -1,4 +1,3 @@
-// due for refactoring
 import './style.css'
 import toDoFactory from './toDoFactory.js'
 import projectFactory from './projectFactory.js'

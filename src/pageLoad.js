@@ -54,6 +54,9 @@ export default function pageLoad() {
 
     const newProject = document.createElement('button')
     const allProjects = document.createElement('ul')
+    newProject.addEventListener('click', () => {
+        projectCreator.popupControl();
+    })
 
     newProject.textContent = 'New Project'
     newProject.id = 'newProject'
@@ -97,6 +100,9 @@ export default function pageLoad() {
     formButton.type = 'button'
     formButton.id = 'projectFormSubmit'
     formButton.textContent = 'Create Project'
+    formButton.addEventListener('click', () => {
+        projectCreator.popupControl();
+    })
 
     formPopup.appendChild(formButton)
 

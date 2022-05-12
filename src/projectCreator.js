@@ -1,6 +1,9 @@
 export const projectCreator = (() => {
-    const testNum = 55
+    const popupControl = () => {
+        const projectPopup = document.getElementById('projectPopup')
+        projectPopup.classList.toggle('active')
+    }
     return {
-        testNum,
+        popupControl,
     }
 })()
