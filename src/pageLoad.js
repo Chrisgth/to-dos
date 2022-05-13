@@ -1,5 +1,4 @@
-import { projectCreator } from "./projectCreator"
-import { toDoCreator } from "./toDoCreator"
+import { projectManager } from "./projectManager"
 // loads the page with full functionality
 export default function pageLoad() {
     // html boilerplate
@@ -46,6 +45,13 @@ export default function pageLoad() {
 
     newToDo.textContent = 'createnewtodo'
     newToDo.id = 'newToDo'
+    newToDo.addEventListener('click', () => {
+        if (projectManager.projectStorage.length === 0) {
+            alert('Please create a project first')
+            return
+        }
+        projectManager.newToDo();
+    })
     allToDos.id = 'allToDos'
     toDoForm.id = 'toDoForm'
     main.appendChild(toDoForm)
@@ -55,7 +61,7 @@ export default function pageLoad() {
     const newProject = document.createElement('button')
     const allProjects = document.createElement('ul')
     newProject.addEventListener('click', () => {
-        projectCreator.popupControl();
+        projectPopup.classList.toggle('active')
     })
 
     newProject.textContent = 'New Project'
@@ -101,7 +107,12 @@ export default function pageLoad() {
     formButton.id = 'projectFormSubmit'
     formButton.textContent = 'Create Project'
     formButton.addEventListener('click', () => {
-        projectCreator.popupControl();
+        if (formPopup[0].value === '' || formPopup[1].value === ''){
+            alert('Please do not leave empty fields')
+            return;
+        }
+        projectManager.newProject()
+        projectPopup.classList.toggle('active')
     })
 
     formPopup.appendChild(formButton)

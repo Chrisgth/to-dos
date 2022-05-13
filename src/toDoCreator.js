@@ -1,6 +1,0 @@
-export const toDoCreator = (() => {
-
-    return {
-        
-    }
-})()
