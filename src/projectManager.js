@@ -27,9 +27,23 @@ export const projectManager = (() => {
                 allToDos.innerHTML = ''
                 if ( projectStorage.length === 0 ) return 
                 for ( let i=0; i<currentProject.todos.length; i++ ) {
+                    const allToDosDiv = document.createElement('div')
                     const allToDosLi = document.createElement('li')
+                    const toDoRemove = document.createElement('button')
+
                     allToDosLi.textContent = currentProject.todos[i].toDoTitle
-                    allToDos.appendChild(allToDosLi)  
+                    toDoRemove.textContent = 'Remove'
+
+                    allToDosDiv.appendChild(allToDosLi)
+                    allToDosDiv.appendChild(toDoRemove)
+                    allToDos.appendChild(allToDosDiv)
+
+                    let allToDosNodeArray = Array.from(allToDos.childNodes)
+
+                    toDoRemove.addEventListener('click', () => {
+                        allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
+                        projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                    })
                 } 
             } else {
                 projectStorage.splice(projectStorage.indexOf(project), 1)
@@ -54,22 +68,51 @@ export const projectManager = (() => {
             currentProject = projectStorage[projectStorage.indexOf(project)]
             allToDos.innerHTML = ''
             for ( let i=0; i<currentProject.todos.length; i++ ) {
+                const allToDosDiv = document.createElement('div')
                 const allToDosLi = document.createElement('li')
+                const toDoRemove = document.createElement('button')
+
                 allToDosLi.textContent = currentProject.todos[i].toDoTitle
-                allToDos.appendChild(allToDosLi)  
+                toDoRemove.textContent = 'Remove'
+
+                allToDosDiv.appendChild(allToDosLi)
+                allToDosDiv.appendChild(toDoRemove)
+                allToDos.appendChild(allToDosDiv)
+
+                let allToDosNodeArray = Array.from(allToDos.childNodes)
+
+                toDoRemove.addEventListener('click', () => {
+                    allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
+                    projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                })
             } 
         })
     }
     const newToDo = () => {
         const allToDos = document.getElementById('allToDos')
         const toDoForm = document.getElementById('toDoForm')
+        
 
         let toDo = toDoFactory(toDoForm[0].value, toDoForm[1].value, toDoForm[2].value)
         currentProject.todos.push(toDo)
 
+        const allToDosDiv = document.createElement('div')
         const allToDosLi = document.createElement('li')
+        const toDoRemove = document.createElement('button')
+
         allToDosLi.textContent = toDo.toDoTitle
-        allToDos.appendChild(allToDosLi)
+        toDoRemove.textContent = 'Remove'
+
+        allToDosDiv.appendChild(allToDosLi)
+        allToDosDiv.appendChild(toDoRemove)
+        allToDos.appendChild(allToDosDiv)
+
+        let allToDosNodeArray = Array.from(allToDos.childNodes)
+ 
+        toDoRemove.addEventListener('click', () => {
+            allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
+            projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+        })
     }
  
     return {
