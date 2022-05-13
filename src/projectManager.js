@@ -38,11 +38,11 @@ export const projectManager = (() => {
                     allToDosDiv.appendChild(toDoRemove)
                     allToDos.appendChild(allToDosDiv)
 
-                    let allToDosNodeArray = Array.from(allToDos.childNodes)
-
                     toDoRemove.addEventListener('click', () => {
+                        let allToDosNodeArray = Array.from(allToDos.childNodes)
                         allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                         projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                        console.log(currentProject.todos)
                     })
                 } 
             } else {
@@ -79,9 +79,8 @@ export const projectManager = (() => {
                 allToDosDiv.appendChild(toDoRemove)
                 allToDos.appendChild(allToDosDiv)
 
-                let allToDosNodeArray = Array.from(allToDos.childNodes)
-
                 toDoRemove.addEventListener('click', () => {
+                    let allToDosNodeArray = Array.from(allToDos.childNodes)
                     allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                     projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
                 })
@@ -106,12 +105,12 @@ export const projectManager = (() => {
         allToDosDiv.appendChild(allToDosLi)
         allToDosDiv.appendChild(toDoRemove)
         allToDos.appendChild(allToDosDiv)
-
-        let allToDosNodeArray = Array.from(allToDos.childNodes)
  
         toDoRemove.addEventListener('click', () => {
+            let allToDosNodeArray = Array.from(allToDos.childNodes)
             allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
             projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                                    console.log(currentProject.todos)
         })
     }
  
