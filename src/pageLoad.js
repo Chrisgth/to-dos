@@ -28,6 +28,7 @@ export default function pageLoad() {
             toDoFormLabel.htmlFor = 'toDoName'
             toDoFormLabel.textContent = 'Title'
         } else if (i===1) {
+            toDoFormInput = document.createElement('textarea')
             toDoFormInput.id = 'toDoDescription'
             toDoFormInput.name = 'toDoDescription'
             toDoFormLabel.htmlFor = 'toDoDescription' 
@@ -57,7 +58,7 @@ export default function pageLoad() {
     toDoForm.id = 'toDoForm'
 
     let projectTitle = document.createElement('input')
-    let projectDescription = document.createElement('input')
+    let projectDescription = document.createElement('textarea')
 
     projectTitle.value = 'Project'
     projectDescription.value = 'Project Description'
@@ -65,6 +66,8 @@ export default function pageLoad() {
     projectTitle.id = 'projectTitle'
     projectDescription.id = 'projectDescription'
     projectOverview.id = 'projectOverview'
+
+    projectOverview.textContent = 'Project Overview'
 
     projectTitle.addEventListener('input', projectManager.projectTitleEditor)
     projectDescription.addEventListener('input', projectManager.projectDescriptionEditor)
