@@ -56,20 +56,19 @@ export default function pageLoad() {
     allToDos.id = 'allToDos'
     toDoForm.id = 'toDoForm'
 
-    let projectTitle = document.createElement('h2')
-    let projectDescription = document.createElement('p')
-    let projectEdit = document.createElement('button')
+    let projectTitle = document.createElement('input')
+    let projectDescription = document.createElement('input')
 
-    projectTitle.textContent = 'Project'
-    projectDescription.textContent = 'Project Description'
-    projectEdit.textContent = 'Edit Project'
+    projectTitle.value = 'Project'
+    projectDescription.value = 'Project Description'
 
     projectTitle.id = 'projectTitle'
     projectDescription.id = 'projectDescription'
-    projectEdit.id = 'projectEdit'
     projectOverview.id = 'projectOverview'
 
-    projectOverview.appendChild(projectEdit)
+    projectTitle.addEventListener('input', projectManager.projectTitleEditor)
+    projectDescription.addEventListener('input', projectManager.projectDescriptionEditor)
+
     projectOverview.appendChild(projectTitle)
     projectOverview.appendChild(projectDescription)
 

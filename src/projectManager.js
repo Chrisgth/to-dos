@@ -14,8 +14,8 @@ export const projectManager = (() => {
         projectStorage.push(project)
         currentProject = projectStorage[projectStorage.indexOf(project)]
 
-        projectTitle.textContent = currentProject.projectName
-        projectDesc.textContent = currentProject.projectDescription
+        projectTitle.value = currentProject.projectName
+        projectDesc.value = currentProject.projectDescription
 
         const allProjectsDiv = document.createElement('div')
         const allProjectsLi = document.createElement('li')
@@ -29,8 +29,18 @@ export const projectManager = (() => {
             if ( currentProject === projectStorage[projectStorage.indexOf(project)]){
                 projectStorage.splice(projectStorage.indexOf(project), 1)
                 currentProject = projectStorage[0]
+                
                 allToDos.innerHTML = ''
-                if ( projectStorage.length === 0 ) return 
+
+                if ( projectStorage.length === 0 ) {
+                    projectTitle.value = 'Project'
+                    projectDesc.value = 'Project Description'              
+                    return
+                }
+
+                projectTitle.value = currentProject.projectName
+                projectDesc.value = currentProject.projectDescription 
+
                 for ( let i=0; i<currentProject.todos.length; i++ ) {
                     const allToDosDiv = document.createElement('div')
                     const allToDosLi = document.createElement('li')
@@ -71,8 +81,8 @@ export const projectManager = (() => {
 
         allProjectsLi.addEventListener('click', () => {
             currentProject = projectStorage[projectStorage.indexOf(project)]
-            projectTitle.textContent = currentProject.projectName
-            projectDesc.textContent = currentProject.projectDescription
+            projectTitle.value = currentProject.projectName
+            projectDesc.value = currentProject.projectDescription
             allToDos.innerHTML = ''
             for ( let i=0; i<currentProject.todos.length; i++ ) {
                 const allToDosDiv = document.createElement('div')
@@ -120,9 +130,17 @@ export const projectManager = (() => {
         })
     }
 
-    const projectEditor = () => {
-        const projectEdit = document.getElementById('projectEdit')
+    const projectTitleEditor = (e) => {
+        if ( projectStorage.length === 0 ) return;
+        projectStorage[projectStorage.indexOf(currentProject)].projectName = e.target.value
+        let allProjectsNodeArray = Array.from(allProjects.childNodes)
+        let currentProjectDivArray = Array.from(allProjectsNodeArray[projectStorage.indexOf(currentProject)].childNodes)
+        currentProjectDivArray[0].textContent = e.target.value
+    }
 
+    const projectDescriptionEditor = (e) => {
+        if ( projectStorage.length === 0 ) return;
+        projectStorage[projectStorage.indexOf(currentProject)].projectDescription = e.target.value
     }
  
     return {
@@ -130,5 +148,7 @@ export const projectManager = (() => {
         newProject,
         currentProject,
         newToDo,
+        projectTitleEditor,
+        projectDescriptionEditor,
     }
 })()
