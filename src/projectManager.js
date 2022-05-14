@@ -50,7 +50,7 @@ export const projectManager = (() => {
                     dateDue.textContent = currentProject.todos[i].toDoDue
                     toDosTitle.disabled = true
                     toDosTitle.value = currentProject.todos[i].toDoTitle
-            
+                    
                     allToDosForm.appendChild(toDosTitle)
             
                     const toDoRemove = document.createElement('button')
@@ -63,7 +63,27 @@ export const projectManager = (() => {
                     allToDosDiv.appendChild(dateDue)
                     allToDosDiv.appendChild(toDoRemove)
                     allToDosDiv.appendChild(toDoExpand)
-                    allToDos.appendChild(allToDosDiv)
+
+                    if (currentProject.todos[i].isPinned === true) {
+                        allToDos.prepend(allToDosDiv)
+                    } else {
+                        allToDos.appendChild(allToDosDiv)
+                    }
+
+                    toDoPin.textContent = 'Pin'
+                    allToDosDiv.appendChild(toDoPin)
+
+                    toDoPin.addEventListener('click', () => {
+                        if (projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned === false) {
+                            allToDos.prepend(allToDosDiv)
+                            projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = true
+                            console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)
+                        } else {
+                            allToDos.append(allToDosDiv)
+                            projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = false
+                            console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)               
+                        }
+                    })
             
                     toDoRemove.addEventListener('click', () => {
                         let allToDosNodeArray = Array.from(allToDos.childNodes)
@@ -152,7 +172,28 @@ export const projectManager = (() => {
                 allToDosDiv.appendChild(dateDue)
                 allToDosDiv.appendChild(toDoRemove)
                 allToDosDiv.appendChild(toDoExpand)
-                allToDos.appendChild(allToDosDiv)
+
+                if (currentProject.todos[i].isPinned === true) {
+                    allToDos.prepend(allToDosDiv)
+                } else {
+                    allToDos.appendChild(allToDosDiv)
+                }
+
+                const toDoPin = document.createElement('button')
+                toDoPin.textContent = 'Pin'
+                allToDosDiv.appendChild(toDoPin)
+
+                toDoPin.addEventListener('click', () => {
+                    if (projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned === false) {
+                        allToDos.prepend(allToDosDiv)
+                        projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = true
+                        console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)
+                    } else {
+                        allToDos.append(allToDosDiv)
+                        projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = false
+                        console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)               
+                    }
+                })
          
                 toDoRemove.addEventListener('click', () => {
                     let allToDosNodeArray = Array.from(allToDos.childNodes)
@@ -201,7 +242,6 @@ export const projectManager = (() => {
         const allToDos = document.getElementById('allToDos')
         const toDoForm = document.getElementById('toDoForm')
         
-
         let toDo = toDoFactory(toDoForm[0].value, toDoForm[1].value, toDoForm[2].value)
         currentProject.todos.push(toDo)
 
@@ -210,23 +250,39 @@ export const projectManager = (() => {
         const toDosTitle = document.createElement('input')
         const dateDue = document.createElement('p')
 
-        dateDue.textContent = toDo.toDoDue
+        dateDue.textContent = currentProject.todos[currentProject.todos.indexOf(toDo)].toDoDue
         toDosTitle.disabled = true
-        toDosTitle.value = toDo.toDoTitle
+        toDosTitle.value = currentProject.todos[currentProject.todos.indexOf(toDo)].toDoTitle
 
         allToDosForm.appendChild(toDosTitle)
 
         const toDoRemove = document.createElement('button')
         const toDoExpand = document.createElement('button')
+        const toDoPin = document.createElement('button')
 
         toDoRemove.textContent = 'Remove'
         toDoExpand.textContent = 'Expand'
+        toDoPin.textContent = 'Pin'
 
         allToDosDiv.appendChild(allToDosForm)
         allToDosDiv.appendChild(dateDue)
         allToDosDiv.appendChild(toDoRemove)
         allToDosDiv.appendChild(toDoExpand)
+        allToDosDiv.appendChild(toDoPin)
+
         allToDos.appendChild(allToDosDiv)
+
+        toDoPin.addEventListener('click', () => {
+            if (projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned === false) {
+                allToDos.prepend(allToDosDiv)
+                projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned = true
+                console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned)
+            } else {
+                allToDos.append(allToDosDiv)
+                projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned = false
+                console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned)               
+            }
+        })
  
         toDoRemove.addEventListener('click', () => {
             let allToDosNodeArray = Array.from(allToDos.childNodes)
