@@ -81,13 +81,18 @@ export const projectManager = (() => {
                             toDosDue.value = currentProject.todos[i].toDoDue
             
                             toDosDescription.addEventListener('input', (e) => {
-                                projectStorage[projectStorage.indexOf(currentProject)].toDoDesc = e.target.value
+                                projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDesc = e.target.value
                                 console.log(projectStorage)
                             })
             
                             toDosDue.addEventListener('input', (e) => {
-                                projectStorage[projectStorage.indexOf(currentProject)].toDoDue = e.target.value
+                                projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDue = e.target.value
                                 dateDue.textContent = e.target.value
+                                console.log(projectStorage)
+                            })
+
+                            toDosTitle.addEventListener('input', (e) => {
+                                projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoTitle = e.target.value
                                 console.log(projectStorage)
                             })
             
@@ -165,13 +170,18 @@ export const projectManager = (() => {
                         toDosDue.value = currentProject.todos[i].toDoDue
         
                         toDosDescription.addEventListener('input', (e) => {
-                            projectStorage[projectStorage.indexOf(currentProject)].toDoDesc = e.target.value
+                            projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDesc = e.target.value
                             console.log(projectStorage)
                         })
         
                         toDosDue.addEventListener('input', (e) => {
-                            projectStorage[projectStorage.indexOf(currentProject)].toDoDue = e.target.value
+                            projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDue = e.target.value
                             dateDue.textContent = e.target.value
+                            console.log(projectStorage)
+                        })
+
+                        toDosTitle.addEventListener('input', (e) => {
+                            projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoTitle = e.target.value
                             console.log(projectStorage)
                         })
         
@@ -230,17 +240,22 @@ export const projectManager = (() => {
                 const toDosDescription = document.createElement('textarea')
                 const toDosDue = document.createElement('input')
                 toDosDue.type = 'date'
-                toDosDescription.value = toDo.toDoDesc
-                toDosDue.value = toDo.toDoDue
+                toDosDescription.value = currentProject.todos[currentProject.todos.indexOf(toDo)].toDoDesc
+                toDosDue.value = currentProject.todos[currentProject.todos.indexOf(toDo)].toDoDue
 
                 toDosDescription.addEventListener('input', (e) => {
-                    toDo.toDoDesc = e.target.value
+                    projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoDesc = e.target.value
                     console.log(projectStorage)
                 })
 
                 toDosDue.addEventListener('input', (e) => {
-                    toDo.toDoDue = e.target.value
+                    projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoDue = e.target.value
                     dateDue.textContent = e.target.value
+                    console.log(projectStorage)
+                })
+
+                toDosTitle.addEventListener('input', (e) => {
+                    projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoTitle = e.target.value
                     console.log(projectStorage)
                 })
 

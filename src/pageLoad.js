@@ -122,6 +122,12 @@ export default function pageLoad() {
         formPopup.appendChild(formInputDiv)
     }
     const formButton = document.createElement('button')
+    const formCloseButton = document.createElement('button')
+    formCloseButton.textContent = 'X'
+    formCloseButton.type = 'button'
+    formCloseButton.addEventListener('click', () => {
+        projectPopup.classList.toggle('active')
+    })
     formButton.type = 'button'
     formButton.id = 'projectFormSubmit'
     formButton.textContent = 'Create Project'
@@ -133,7 +139,7 @@ export default function pageLoad() {
         projectManager.newProject()
         projectPopup.classList.toggle('active')
     })
-
+    formPopup.appendChild(formCloseButton)
     formPopup.appendChild(formButton)
 
     body.appendChild(projectPopup)
