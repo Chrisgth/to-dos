@@ -16,6 +16,7 @@ export default function pageLoad() {
     const allToDos = document.createElement('ul')
     const toDoForm = document.createElement('form')
     const projectOverview = document.createElement('div')
+    const newTask = document.createElement('button')
 
     for( let i=0; i<3; i++ ) {
         let toDoFormInputDiv = document.createElement('div')
@@ -44,6 +45,19 @@ export default function pageLoad() {
         toDoFormInputDiv.appendChild(toDoFormInput)
         toDoForm.appendChild(toDoFormInputDiv)
     }
+
+    newTask.textContent = 'Add new task'
+    newTask.addEventListener('click', () => {
+        if (newTask.textContent === 'Add new task') {
+            toDoForm.classList.toggle('inactive')
+            newToDo.classList.toggle('inactive')
+            newTask.textContent = 'Close task creation'
+        } else {
+            toDoForm.classList.toggle('inactive')
+            newToDo.classList.toggle('inactive')
+            newTask.textContent = 'Add new task'           
+        }
+    })
 
     newToDo.textContent = 'createnewtodo'
     newToDo.id = 'newToDo'
@@ -76,9 +90,13 @@ export default function pageLoad() {
     projectOverview.appendChild(projectDescription)
 
     main.appendChild(projectOverview)
+    main.appendChild(newTask)
     main.appendChild(toDoForm)
     main.appendChild(newToDo)
     main.appendChild(allToDos)
+
+    toDoForm.classList.toggle('inactive')
+    newToDo.classList.toggle('inactive')
 
     const newProject = document.createElement('button')
     const allProjects = document.createElement('ul')
