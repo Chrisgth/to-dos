@@ -7,10 +7,15 @@ export const projectManager = (() => {
         const allProjects = document.querySelector('#allProjects')
         const allToDos = document.getElementById('allToDos')
         const formPopup = document.getElementById('formPopup')
+        const projectTitle = document.getElementById('projectTitle')
+        const projectDesc = document.getElementById('projectDescription')
 
         let project = projectFactory(formPopup[0].value, formPopup[1].value)
         projectStorage.push(project)
         currentProject = projectStorage[projectStorage.indexOf(project)]
+
+        projectTitle.textContent = currentProject.projectName
+        projectDesc.textContent = currentProject.projectDescription
 
         const allProjectsDiv = document.createElement('div')
         const allProjectsLi = document.createElement('li')
@@ -66,6 +71,8 @@ export const projectManager = (() => {
 
         allProjectsLi.addEventListener('click', () => {
             currentProject = projectStorage[projectStorage.indexOf(project)]
+            projectTitle.textContent = currentProject.projectName
+            projectDesc.textContent = currentProject.projectDescription
             allToDos.innerHTML = ''
             for ( let i=0; i<currentProject.todos.length; i++ ) {
                 const allToDosDiv = document.createElement('div')
@@ -110,8 +117,12 @@ export const projectManager = (() => {
             let allToDosNodeArray = Array.from(allToDos.childNodes)
             allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
             projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
-                                    console.log(currentProject.todos)
         })
+    }
+
+    const projectEditor = () => {
+        const projectEdit = document.getElementById('projectEdit')
+
     }
  
     return {

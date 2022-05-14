@@ -15,6 +15,7 @@ export default function pageLoad() {
     const newToDo = document.createElement('button')
     const allToDos = document.createElement('ul')
     const toDoForm = document.createElement('form')
+    const projectOverview = document.createElement('div')
 
     for( let i=0; i<3; i++ ) {
         let toDoFormInputDiv = document.createElement('div')
@@ -54,6 +55,25 @@ export default function pageLoad() {
     })
     allToDos.id = 'allToDos'
     toDoForm.id = 'toDoForm'
+
+    let projectTitle = document.createElement('h2')
+    let projectDescription = document.createElement('p')
+    let projectEdit = document.createElement('button')
+
+    projectTitle.textContent = 'Project'
+    projectDescription.textContent = 'Project Description'
+    projectEdit.textContent = 'Edit Project'
+
+    projectTitle.id = 'projectTitle'
+    projectDescription.id = 'projectDescription'
+    projectEdit.id = 'projectEdit'
+    projectOverview.id = 'projectOverview'
+
+    projectOverview.appendChild(projectEdit)
+    projectOverview.appendChild(projectTitle)
+    projectOverview.appendChild(projectDescription)
+
+    main.appendChild(projectOverview)
     main.appendChild(toDoForm)
     main.appendChild(newToDo)
     main.appendChild(allToDos)
