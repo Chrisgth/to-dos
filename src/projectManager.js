@@ -21,7 +21,7 @@ export const projectManager = (() => {
         const allProjectsLi = document.createElement('li')
         const projectRemove = document.createElement('button')
 
-        projectRemove.textContent = 'Remove'
+        projectRemove.textContent = 'X'
 
         projectRemove.addEventListener('click', () => {
             let allProjectsNodeArray = Array.from(allProjects.childNodes)
