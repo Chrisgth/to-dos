@@ -43,21 +43,62 @@ export const projectManager = (() => {
 
                 for ( let i=0; i<currentProject.todos.length; i++ ) {
                     const allToDosDiv = document.createElement('div')
-                    const allToDosLi = document.createElement('li')
+                    const allToDosForm = document.createElement('form')
+                    const toDosTitle = document.createElement('input')
+                    const dateDue = document.createElement('p')
+            
+                    dateDue.textContent = currentProject.todos[i].toDoDue
+                    toDosTitle.disabled = true
+                    toDosTitle.value = currentProject.todos[i].toDoTitle
+            
+                    allToDosForm.appendChild(toDosTitle)
+            
                     const toDoRemove = document.createElement('button')
-
-                    allToDosLi.textContent = currentProject.todos[i].toDoTitle
+                    const toDoExpand = document.createElement('button')
+            
                     toDoRemove.textContent = 'Remove'
-
-                    allToDosDiv.appendChild(allToDosLi)
+                    toDoExpand.textContent = 'Expand'
+            
+                    allToDosDiv.appendChild(allToDosForm)
+                    allToDosDiv.appendChild(dateDue)
                     allToDosDiv.appendChild(toDoRemove)
+                    allToDosDiv.appendChild(toDoExpand)
                     allToDos.appendChild(allToDosDiv)
-
+            
                     toDoRemove.addEventListener('click', () => {
                         let allToDosNodeArray = Array.from(allToDos.childNodes)
                         allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                         projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
-                        console.log(currentProject.todos)
+                    })
+            
+                    toDoExpand.addEventListener('click', () => {
+                        if ( allToDosForm.childNodes.length === 1 ) {
+                            toDosTitle.disabled = false
+                            const toDosDescription = document.createElement('textarea')
+                            const toDosDue = document.createElement('input')
+                            toDosDue.type = 'date'
+                            toDosDescription.value = currentProject.todos[i].toDoDesc
+                            toDosDue.value = currentProject.todos[i].toDoDue
+            
+                            toDosDescription.addEventListener('input', (e) => {
+                                projectStorage[projectStorage.indexOf(currentProject)].toDoDesc = e.target.value
+                                console.log(projectStorage)
+                            })
+            
+                            toDosDue.addEventListener('input', (e) => {
+                                projectStorage[projectStorage.indexOf(currentProject)].toDoDue = e.target.value
+                                dateDue.textContent = e.target.value
+                                console.log(projectStorage)
+                            })
+            
+                            allToDosForm.appendChild(toDosDescription)
+                            allToDosForm.appendChild(toDosDue)
+                        } else {
+                            toDosTitle.disabled = true
+                            for ( let i=0; i<allToDosForm.childNodes.length; i++) {
+                                allToDosForm.removeChild(allToDosForm.lastChild)
+                            }
+                        }
                     })
                 } 
             } else {
@@ -86,20 +127,62 @@ export const projectManager = (() => {
             allToDos.innerHTML = ''
             for ( let i=0; i<currentProject.todos.length; i++ ) {
                 const allToDosDiv = document.createElement('div')
-                const allToDosLi = document.createElement('li')
+                const allToDosForm = document.createElement('form')
+                const toDosTitle = document.createElement('input')
+                const dateDue = document.createElement('p')
+        
+                dateDue.textContent = currentProject.todos[i].toDoDue
+                toDosTitle.disabled = true
+                toDosTitle.value = currentProject.todos[i].toDoTitle
+        
+                allToDosForm.appendChild(toDosTitle)
+        
                 const toDoRemove = document.createElement('button')
-
-                allToDosLi.textContent = currentProject.todos[i].toDoTitle
+                const toDoExpand = document.createElement('button')
+        
                 toDoRemove.textContent = 'Remove'
-
-                allToDosDiv.appendChild(allToDosLi)
+                toDoExpand.textContent = 'Expand'
+        
+                allToDosDiv.appendChild(allToDosForm)
+                allToDosDiv.appendChild(dateDue)
                 allToDosDiv.appendChild(toDoRemove)
+                allToDosDiv.appendChild(toDoExpand)
                 allToDos.appendChild(allToDosDiv)
-
+         
                 toDoRemove.addEventListener('click', () => {
                     let allToDosNodeArray = Array.from(allToDos.childNodes)
                     allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                     projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                })
+        
+                toDoExpand.addEventListener('click', () => {
+                    if ( allToDosForm.childNodes.length === 1 ) {
+                        toDosTitle.disabled = false
+                        const toDosDescription = document.createElement('textarea')
+                        const toDosDue = document.createElement('input')
+                        toDosDue.type = 'date'
+                        toDosDescription.value = currentProject.todos[i].toDoDesc
+                        toDosDue.value = currentProject.todos[i].toDoDue
+        
+                        toDosDescription.addEventListener('input', (e) => {
+                            projectStorage[projectStorage.indexOf(currentProject)].toDoDesc = e.target.value
+                            console.log(projectStorage)
+                        })
+        
+                        toDosDue.addEventListener('input', (e) => {
+                            projectStorage[projectStorage.indexOf(currentProject)].toDoDue = e.target.value
+                            dateDue.textContent = e.target.value
+                            console.log(projectStorage)
+                        })
+        
+                        allToDosForm.appendChild(toDosDescription)
+                        allToDosForm.appendChild(toDosDue)
+                    } else {
+                        toDosTitle.disabled = true
+                        for ( let i=0; i<allToDosForm.childNodes.length; i++) {
+                            allToDosForm.removeChild(allToDosForm.lastChild)
+                        }
+                    }
                 })
             } 
         })
@@ -113,14 +196,26 @@ export const projectManager = (() => {
         currentProject.todos.push(toDo)
 
         const allToDosDiv = document.createElement('div')
-        const allToDosLi = document.createElement('li')
+        const allToDosForm = document.createElement('form')
+        const toDosTitle = document.createElement('input')
+        const dateDue = document.createElement('p')
+
+        dateDue.textContent = toDo.toDoDue
+        toDosTitle.disabled = true
+        toDosTitle.value = toDo.toDoTitle
+
+        allToDosForm.appendChild(toDosTitle)
+
         const toDoRemove = document.createElement('button')
+        const toDoExpand = document.createElement('button')
 
-        allToDosLi.textContent = toDo.toDoTitle
         toDoRemove.textContent = 'Remove'
+        toDoExpand.textContent = 'Expand'
 
-        allToDosDiv.appendChild(allToDosLi)
+        allToDosDiv.appendChild(allToDosForm)
+        allToDosDiv.appendChild(dateDue)
         allToDosDiv.appendChild(toDoRemove)
+        allToDosDiv.appendChild(toDoExpand)
         allToDos.appendChild(allToDosDiv)
  
         toDoRemove.addEventListener('click', () => {
@@ -128,6 +223,37 @@ export const projectManager = (() => {
             allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
             projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
         })
+
+        toDoExpand.addEventListener('click', () => {
+            if ( allToDosForm.childNodes.length === 1 ) {
+                toDosTitle.disabled = false
+                const toDosDescription = document.createElement('textarea')
+                const toDosDue = document.createElement('input')
+                toDosDue.type = 'date'
+                toDosDescription.value = toDo.toDoDesc
+                toDosDue.value = toDo.toDoDue
+
+                toDosDescription.addEventListener('input', (e) => {
+                    toDo.toDoDesc = e.target.value
+                    console.log(projectStorage)
+                })
+
+                toDosDue.addEventListener('input', (e) => {
+                    toDo.toDoDue = e.target.value
+                    dateDue.textContent = e.target.value
+                    console.log(projectStorage)
+                })
+
+                allToDosForm.appendChild(toDosDescription)
+                allToDosForm.appendChild(toDosDue)
+            } else {
+                toDosTitle.disabled = true
+                for ( let i=0; i<allToDosForm.childNodes.length; i++) {
+                    allToDosForm.removeChild(allToDosForm.lastChild)
+                }
+            }
+        })
+
     }
 
     const projectTitleEditor = (e) => {
