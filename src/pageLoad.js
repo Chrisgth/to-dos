@@ -159,11 +159,18 @@ export default function pageLoad() {
             alert('Please do not leave empty fields')
             return;
         }
-        projectManager.newProject()
+        projectManager.newProject(false)
         projectPopup.classList.toggle('active')
     })
     formPopup.appendChild(formCloseButton)
     formPopup.appendChild(formButton)
 
     body.appendChild(projectPopup)
+
+    if ( localStorage.length !== 0 ) {
+        let storage = JSON.parse(localStorage.getItem('projectStorage'))
+        for (let i=0; i<storage.length; i++) {
+            projectManager.newProject(true, i)
+        }
+    } 
 }

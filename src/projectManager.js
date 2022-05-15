@@ -1,19 +1,37 @@
 import projectFactory from "./projectFactory"
 import toDoFactory from "./toDoFactory"
 export const projectManager = (() => {
+
+    const store = () => {
+        localStorage.setItem('projectStorage', JSON.stringify(projectStorage))
+    }
+
     let projectStorage = []
     let currentProject = 0
-    const newProject = () => {
+
+    if (localStorage.length !== 0) {
+        let storage = localStorage.getItem('projectStorage')
+        projectStorage = JSON.parse(storage)
+        console.log(projectStorage)
+    }
+    const newProject = (storageCheck, storageItem) => {
         const allProjects = document.querySelector('#allProjects')
         const allToDos = document.getElementById('allToDos')
         const formPopup = document.getElementById('formPopup')
         const projectTitle = document.getElementById('projectTitle')
         const projectDesc = document.getElementById('projectDescription')
 
-        let project = projectFactory(formPopup[0].value, formPopup[1].value)
-        projectStorage.push(project)
-        currentProject = projectStorage[projectStorage.indexOf(project)]
+        let project = 0
 
+        if (storageCheck === false) {
+            project = projectFactory(formPopup[0].value, formPopup[1].value)
+            projectStorage.push(project)
+            store()
+            currentProject = projectStorage[projectStorage.indexOf(project)]
+        } else {
+            currentProject = projectStorage[storageItem]
+            project = currentProject
+        }
         projectTitle.value = currentProject.projectName
         projectDesc.value = currentProject.projectDescription
 
@@ -29,7 +47,7 @@ export const projectManager = (() => {
             if ( currentProject === projectStorage[projectStorage.indexOf(project)]){
                 projectStorage.splice(projectStorage.indexOf(project), 1)
                 currentProject = projectStorage[0]
-                
+                store()
                 allToDos.innerHTML = ''
 
                 if ( projectStorage.length === 0 ) {
@@ -79,12 +97,14 @@ export const projectManager = (() => {
                             projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = false
                             console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)               
                         }
+                        store()
                     })
             
                     toDoRemove.addEventListener('click', () => {
                         let allToDosNodeArray = Array.from(allToDos.childNodes)
                         allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                         projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                        store()
                     })
             
                     toDoExpand.addEventListener('click', () => {
@@ -99,31 +119,38 @@ export const projectManager = (() => {
                             toDosDescription.addEventListener('input', (e) => {
                                 projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDesc = e.target.value
                                 console.log(projectStorage)
+                                store();
                             })
             
                             toDosDue.addEventListener('input', (e) => {
                                 projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDue = e.target.value
                                 dateDue.textContent = e.target.value
                                 console.log(projectStorage)
+                                store();
                             })
 
                             toDosTitle.addEventListener('input', (e) => {
                                 projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoTitle = e.target.value
                                 console.log(projectStorage)
+                                store();
                             })
             
                             allToDosForm.appendChild(toDosDescription)
                             allToDosForm.appendChild(toDosDue)
+                            store()
                         } else {
                             toDosTitle.disabled = true
                             for ( let i=0; i<allToDosForm.childNodes.length; i++) {
                                 allToDosForm.removeChild(allToDosForm.lastChild)
                             }
+                            store()
                         }
                     })
+                    store()
                 } 
             } else {
                 projectStorage.splice(projectStorage.indexOf(project), 1)
+                store()
             }
 
         })
@@ -171,7 +198,7 @@ export const projectManager = (() => {
                 } else {
                     allToDos.appendChild(allToDosDiv)
                 }
-
+                store()
                 const toDoPin = document.createElement('button')
                 allToDosDiv.appendChild(toDoPin)
 
@@ -185,12 +212,14 @@ export const projectManager = (() => {
                         projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned = false
                         console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[i].isPinned)               
                     }
+                    store()
                 })
          
                 toDoRemove.addEventListener('click', () => {
                     let allToDosNodeArray = Array.from(allToDos.childNodes)
                     allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
                     projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+                    store()
                 })
         
                 toDoExpand.addEventListener('click', () => {
@@ -205,17 +234,20 @@ export const projectManager = (() => {
                         toDosDescription.addEventListener('input', (e) => {
                             projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDesc = e.target.value
                             console.log(projectStorage)
+                            store();
                         })
         
                         toDosDue.addEventListener('input', (e) => {
                             projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoDue = e.target.value
                             dateDue.textContent = e.target.value
                             console.log(projectStorage)
+                            store();
                         })
 
                         toDosTitle.addEventListener('input', (e) => {
                             projectStorage[projectStorage.indexOf(currentProject)].todos[i].toDoTitle = e.target.value
                             console.log(projectStorage)
+                            store();
                         })
         
                         allToDosForm.appendChild(toDosDescription)
@@ -226,6 +258,7 @@ export const projectManager = (() => {
                             allToDosForm.removeChild(allToDosForm.lastChild)
                         }
                     }
+                    store()
                 })
             } 
         })
@@ -236,6 +269,7 @@ export const projectManager = (() => {
         
         let toDo = toDoFactory(toDoForm[0].value, toDoForm[1].value, toDoForm[2].value)
         currentProject.todos.push(toDo)
+        store()
 
         const allToDosDiv = document.createElement('div')
         const allToDosForm = document.createElement('form')
@@ -270,12 +304,14 @@ export const projectManager = (() => {
                 projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned = false
                 console.log(projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned)               
             }
+            store()
         })
  
         toDoRemove.addEventListener('click', () => {
             let allToDosNodeArray = Array.from(allToDos.childNodes)
             allToDosNodeArray[allToDosNodeArray.indexOf(allToDosDiv)].remove()
             projectStorage[projectStorage.indexOf(currentProject)].todos.splice(allToDosNodeArray.indexOf(allToDosDiv), 1)
+            store()
         })
 
         toDoExpand.addEventListener('click', () => {
@@ -290,26 +326,31 @@ export const projectManager = (() => {
                 toDosDescription.addEventListener('input', (e) => {
                     projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoDesc = e.target.value
                     console.log(projectStorage)
+                    store();
                 })
 
                 toDosDue.addEventListener('input', (e) => {
                     projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoDue = e.target.value
                     dateDue.textContent = e.target.value
                     console.log(projectStorage)
+                    store();
                 })
 
                 toDosTitle.addEventListener('input', (e) => {
                     projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].toDoTitle = e.target.value
                     console.log(projectStorage)
+                    store();
                 })
 
                 allToDosForm.appendChild(toDosDescription)
                 allToDosForm.appendChild(toDosDue)
+                store()
             } else {
                 toDosTitle.disabled = true
                 for ( let i=0; i<allToDosForm.childNodes.length; i++) {
                     allToDosForm.removeChild(allToDosForm.lastChild)
                 }
+                store()
             }
         })
 
@@ -321,11 +362,13 @@ export const projectManager = (() => {
         let allProjectsNodeArray = Array.from(allProjects.childNodes)
         let currentProjectDivArray = Array.from(allProjectsNodeArray[projectStorage.indexOf(currentProject)].childNodes)
         currentProjectDivArray[0].textContent = e.target.value
+        store()
     }
 
     const projectDescriptionEditor = (e) => {
         if ( projectStorage.length === 0 ) return;
         projectStorage[projectStorage.indexOf(currentProject)].projectDescription = e.target.value
+        store()
     }
  
     return {
