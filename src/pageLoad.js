@@ -59,7 +59,7 @@ export default function pageLoad() {
         }
     })
 
-    newToDo.textContent = 'createnewtodo'
+    newToDo.textContent = 'Create Task'
     newToDo.id = 'newToDo'
     newToDo.addEventListener('click', () => {
         if (projectManager.projectStorage.length === 0) {
@@ -133,6 +133,7 @@ export default function pageLoad() {
             formLabel.htmlFor = 'projectName'
             formLabel.textContent = 'Project Name'
         } else if (i===1) {
+            formInput = document.createElement('textarea')
             formInput.id = 'projectDescription'
             formInput.name = 'projectDescription'
             formLabel.htmlFor = 'projectDescription' 
@@ -144,6 +145,7 @@ export default function pageLoad() {
     }
     const formButton = document.createElement('button')
     const formCloseButton = document.createElement('button')
+    formCloseButton.id = 'formCloseButton'
     formCloseButton.textContent = 'X'
     formCloseButton.type = 'button'
     formCloseButton.addEventListener('click', () => {

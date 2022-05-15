@@ -56,9 +56,6 @@ export const projectManager = (() => {
                     const toDoRemove = document.createElement('button')
                     const toDoExpand = document.createElement('button')
             
-                    toDoRemove.textContent = 'Remove'
-                    toDoExpand.textContent = 'Expand'
-            
                     allToDosDiv.appendChild(allToDosForm)
                     allToDosDiv.appendChild(dateDue)
                     allToDosDiv.appendChild(toDoRemove)
@@ -70,7 +67,6 @@ export const projectManager = (() => {
                         allToDos.appendChild(allToDosDiv)
                     }
 
-                    toDoPin.textContent = 'Pin'
                     allToDosDiv.appendChild(toDoPin)
 
                     toDoPin.addEventListener('click', () => {
@@ -165,9 +161,6 @@ export const projectManager = (() => {
                 const toDoRemove = document.createElement('button')
                 const toDoExpand = document.createElement('button')
         
-                toDoRemove.textContent = 'Remove'
-                toDoExpand.textContent = 'Expand'
-        
                 allToDosDiv.appendChild(allToDosForm)
                 allToDosDiv.appendChild(dateDue)
                 allToDosDiv.appendChild(toDoRemove)
@@ -180,7 +173,6 @@ export const projectManager = (() => {
                 }
 
                 const toDoPin = document.createElement('button')
-                toDoPin.textContent = 'Pin'
                 allToDosDiv.appendChild(toDoPin)
 
                 toDoPin.addEventListener('click', () => {
@@ -259,10 +251,6 @@ export const projectManager = (() => {
         const toDoRemove = document.createElement('button')
         const toDoExpand = document.createElement('button')
         const toDoPin = document.createElement('button')
-
-        toDoRemove.textContent = 'Remove'
-        toDoExpand.textContent = 'Expand'
-        toDoPin.textContent = 'Pin'
 
         allToDosDiv.appendChild(allToDosForm)
         allToDosDiv.appendChild(dateDue)

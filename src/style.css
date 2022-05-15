@@ -16,9 +16,7 @@ body {
     display: grid;
     grid-template: 1fr 19fr / 1fr 3fr;
 }
-* {
-    border: 1px solid white;
-}
+
 
 header {
     grid-column: 1 / end;
@@ -38,6 +36,7 @@ header > p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-right: 4px solid white;
 }
 button,
 li {
@@ -70,6 +69,7 @@ main {
     gap: 2rem;
     overflow: scroll;
     background-color: #D3D0CB;
+    align-items: center;
 }
 main > * {
     background-color: white;
@@ -78,18 +78,33 @@ main > * {
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
     margin-left: 100px;
     margin-right: 100px;
     max-height: 200px;
-    min-width: 200px;
+    min-width: 80%;
+    background-color: #393E41;
+    color: white;
+    padding-top: 1rem;
+    border: 4px solid white;
+    border-radius: 6px;
 }
 #projectOverview > textarea {
     max-width: 100%;
     height: 4rem;
     border: none;
+    background-color:#587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+}
+#projectOverview > input {
+    background-color: #587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
 }
 #toDoForm > div {
     display: flex;
@@ -103,22 +118,48 @@ main > * {
 #allToDos > div > form {
     display: flex;
     flex-direction: column;
+    min-width: 70%;
 }
 #allToDos > div {
     display: flex;
+    justify-content: space-between;
 }
 #toDoForm {
     margin-left: 100px;
     margin-right: 100px;
+    min-width: 80%;
+    background-color: #393E41;
+    color: white;
+    padding-top: 1rem;
+    border: 4px solid white;
+    border-radius: 6px;
 }
-
+#toDoForm > div > textarea {
+    background-color:#587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+}
+#toDoForm > div > input {
+    background-color: #587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+}
+#toDoForm > div > label {
+    border: none;
+    margin-left: 4px;
+    margin-right: 4px;
+}
 .inactive {
     opacity: 0;
     pointer-events: none;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
-#newProject {
+#newProject, main > button {
     border-radius: 6px;
     font-weight: bold;
     font-size: larger;
@@ -128,13 +169,19 @@ main > * {
     border: 2px solid white;
 }
 
-#newProject:hover {
+main > button {
+    width: fit-content;
+}
+
+#newProject:hover, main > button:hover, #formPopup > button:hover {
     background-color: #393E41;
 }
 
 #allProjects {
     width: 100%;
     color: white;
+    border-top: 4px solid white;
+    margin-top: 16px;   
 }
 
 #allProjects > div {
@@ -150,6 +197,7 @@ main > * {
     margin: 4px;
     padding: 0;
     font-size: 1rem;
+    border: 2px solid white;
 }
 
 #allProjects > div > button:hover {
@@ -161,8 +209,147 @@ main > * {
     background-color: #587B7F;
     margin: 4px;
     font-size: 1rem;
+    min-height: 19px;
+    border: 2px solid white;
 }
 
 #allProjects > div > li:hover {
     background-color: #393E41;
+}
+
+#formPopup {
+    background-color: #393E41;
+    color: white;
+    border: 4px solid white;
+    border-radius: 6px;
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#formPopup > div {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    order: 2;
+}
+#formPopup > div > textarea {
+    background-color:#587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+    min-height: 8rem;
+}
+#formPopup > div > input {
+    background-color: #587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+}
+#formPopup > div > label {
+    border: none;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+#formCloseButton {
+    background-color: #587B7F;
+    width: 2em;
+    height: 100%;
+    margin: 4px;
+    padding: 0;
+    font-size: 1rem;
+    border: 2px solid white;
+    order: 1;
+    align-self: flex-end;
+}
+#projectFormSubmit {
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 1rem;
+    background-color: #587B7F;
+    color: white;
+    border: 2px solid white;
+    margin-bottom: 1rem;
+    order: 3;
+}
+
+#allToDos {
+    min-width: 80%;
+    background-color: #D3D0CB;
+}
+
+#allToDos > div{
+    background-color: #393E41;
+    color: white;
+    margin-top: 0.5rem;
+    border: 4px solid white;
+    border-radius: 6px;
+    min-width: 100%;
+    align-items: center;
+}
+#allToDos > div > form > input{
+    background-color: #587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+    height: 1rem;
+    font-size: 1rem;
+}
+#allToDos > div > form > textarea {
+    background-color: #587B7F;
+    color: white;
+    margin: 4px;
+    border: 2px solid white;
+    min-height: 4rem;
+}
+#allToDos>div>button:nth-child(3) {
+    background: url(trash-can.png) no-repeat left center;
+    width: 24px;
+    height: 24px;
+    align-self: flex-start;
+    margin: none;
+    padding: none;
+    border: none;
+    filter: invert(100%) sepia(26%) saturate(328%) hue-rotate(225deg) brightness(114%) contrast(100%);
+    margin-top: 4px;
+}
+#allToDos>div>button:nth-child(4) {
+    background: url(down-arrow.png) no-repeat left center;
+    width: 24px;
+    height: 24px;
+    align-self: flex-start;
+    margin: none;
+    padding: none;
+    border: none;
+    filter: invert(100%) sepia(26%) saturate(328%) hue-rotate(225deg) brightness(114%) contrast(100%);
+    margin-top: 4px;
+}
+#allToDos>div>button:nth-child(5) {
+    background: url(pin.png) no-repeat left center;
+    width: 24px;
+    height: 24px;
+    align-self: flex-start;
+    margin: none;
+    padding: none;
+    border: none;
+    filter: invert(100%) sepia(26%) saturate(328%) hue-rotate(225deg) brightness(114%) contrast(100%);
+    margin-top: 4px;
+}
+#allToDos>div>form>input:disabled{
+    background-color: #393E41;
+    color: white;
+    min-height: 1.5rem;
+    font-size: 1.5rem;
+    border: none;
+}
+#allToDos>div>p {
+    margin: 0;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+#allToDos > div > button:hover {
+    filter: none;
 }
