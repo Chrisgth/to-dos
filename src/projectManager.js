@@ -31,6 +31,9 @@ export const projectManager = (() => {
         } else {
             currentProject = projectStorage[storageItem]
             project = currentProject
+            for ( let i=0; i<currentProject.todos.length; i++ ){
+                newToDo(true, i)
+            }
         }
         projectTitle.value = currentProject.projectName
         projectDesc.value = currentProject.projectDescription
@@ -161,13 +164,6 @@ export const projectManager = (() => {
         allProjectsDiv.appendChild(projectRemove)
         allProjects.appendChild(allProjectsDiv)
 
-        allToDos.innerHTML = ''
-        for ( let i=0; i<currentProject.todos.length; i++ ) {
-            const allToDosLi = document.createElement('li')
-            allToDosLi.textContent = currentProject.todos[i].toDoTitle
-            allToDos.appendChild(allToDosLi)  
-        } 
-
         allProjectsLi.addEventListener('click', () => {
             currentProject = projectStorage[projectStorage.indexOf(project)]
             projectTitle.value = currentProject.projectName
@@ -263,13 +259,17 @@ export const projectManager = (() => {
             } 
         })
     }
-    const newToDo = () => {
+    const newToDo = (storageCheck, storageItem) => {
         const allToDos = document.getElementById('allToDos')
         const toDoForm = document.getElementById('toDoForm')
-        
-        let toDo = toDoFactory(toDoForm[0].value, toDoForm[1].value, toDoForm[2].value)
-        currentProject.todos.push(toDo)
-        store()
+        let toDo = 0
+        if ( storageCheck === false ) {
+            toDo = toDoFactory(toDoForm[0].value, toDoForm[1].value, toDoForm[2].value)
+            currentProject.todos.push(toDo)
+            store()
+        } else {
+            toDo = currentProject.todos[storageItem]
+        }
 
         const allToDosDiv = document.createElement('div')
         const allToDosForm = document.createElement('form')
@@ -292,7 +292,11 @@ export const projectManager = (() => {
         allToDosDiv.appendChild(toDoExpand)
         allToDosDiv.appendChild(toDoPin)
 
-        allToDos.appendChild(allToDosDiv)
+        if ( toDo.isPinned === true ){
+            allToDos.prepend(allToDosDiv)
+        } else {
+            allToDos.appendChild(allToDosDiv)
+        }
 
         toDoPin.addEventListener('click', () => {
             if (projectStorage[projectStorage.indexOf(currentProject)].todos[currentProject.todos.indexOf(toDo)].isPinned === false) {

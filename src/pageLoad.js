@@ -66,7 +66,7 @@ export default function pageLoad() {
             alert('Please create a project first')
             return
         }
-        projectManager.newToDo();
+        projectManager.newToDo(false);
     })
     allToDos.id = 'allToDos'
     toDoForm.id = 'toDoForm'
@@ -159,6 +159,7 @@ export default function pageLoad() {
             alert('Please do not leave empty fields')
             return;
         }
+        allToDos.innerHTML = ''
         projectManager.newProject(false)
         projectPopup.classList.toggle('active')
     })
@@ -170,6 +171,7 @@ export default function pageLoad() {
     if ( localStorage.length !== 0 ) {
         let storage = JSON.parse(localStorage.getItem('projectStorage'))
         for (let i=0; i<storage.length; i++) {
+            allToDos.innerHTML = ''
             projectManager.newProject(true, i)
         }
     } 
